@@ -52,7 +52,7 @@ function create_items(items, mode) {
 
 function create_itemfull(item) {
         div_itemfull.find(".modal-content").empty();
-        div_itemfull.find(".modal-content").append( `<div>${item.title}<br>${item.description}<br>posted on ${item.date.split("-")[2].split("T")[0]}/${item.date.split("-")[1]}/${item.date.split("-")[0]}</div>` );    
+        div_itemfull.find(".modal-content").append( `<div>${item.title}<br>${item.description}<br>posted on ${item.creation_date.split("-")[2].split("T")[0]}/${item.creation_date.split("-")[1]}/${item.creation_date.split("-")[0]}</div>` );    
         div_itemfull.toggleClass( "is-active" );              
 }
 
@@ -80,7 +80,7 @@ div_top5.on("click",e=>{
 });
 
 btn_search_submit.on("click",()=>{
-    if (inp_search.val()) {
+    if (inp_search.val()) { console.log(inp_search.val());
         connect_to_api(url+"search/"+inp_search.val(), "GET").then(e=>create_items(e,"search"));
     }
 })
@@ -93,7 +93,7 @@ form.on("submit",e=>{
     let root = e.target;
 
     if (root.title.value && root.description.value && root.name.value && root.loc.value && root.price.value && root.email.value) {
-
+console.log('success');
             let data = {title:root.title.value,
                         description:root.description.value,
                         name:root.name.value,
