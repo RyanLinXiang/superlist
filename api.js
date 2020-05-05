@@ -65,7 +65,7 @@ connection_id.then (async kleinanzeigen => {
 app.get('/show/:id', (req, res) => {
     connection_id.then(connection => {
         connection.query(
-            'SELECT id, title, description, creation_date FROM anzeigen WHERE id = ?',
+            'SELECT id, title, description, creation_date, DATEDIFF(CURRENT_TIMESTAMP , creation_date) AS dayspast FROM anzeigen WHERE id = ?',
             req.params.id
         )
         .then(function(currentValue) {res.json(currentValue[0])});
