@@ -1,1 +1,6 @@
-node_modules
+api.js
+node_modules/
+package.json
+public/index2.html
+package-lock.json
+public/.vscode
