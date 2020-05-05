@@ -100,7 +100,7 @@ form.on("submit",async e=>{
 
     if (root.title.value && root.description.value && root.name.value && root.loc.value && root.price.value && root.email.value) {
 
-        if (!isNaN(parseFloat(root.price.value))) {
+        if (!isNaN(parseFloat(root.price.value)) || root.price.value==0) {
             let data = {title:root.title.value,
                         description:root.description.value,
                         name:root.name.value,
@@ -117,7 +117,7 @@ form.on("submit",async e=>{
             }).catch(console.log);
         }
         else
-            error = "Price must be in the format xx.xx!";    
+            error = "Price must be in the format xx.xx or 0!";    
     }
     else
         error = "Please fill out all fields!";
