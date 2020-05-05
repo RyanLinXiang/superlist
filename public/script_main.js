@@ -10,10 +10,14 @@ let btn_search_loc_submit = $("#search_loc_submit");
 let btn_close_itemfull = $("#close_itemfull");
 let btn_new_entry = $("#new_entry");
 let btn_close_entry = $("#close_add_entry");
+let btn_close_message = $("#close_message");
+let btn_form_reset = $("#reset");
 let div_entry = $("#add_entry");
 let ul_matches = $("#matches");
+let div_message = $("#message");
 let form = $(document.entry);
 let all_locs = [];
+let lastclass;
 
 let url = "http://localhost:3000/";
 let data = {};
@@ -42,17 +46,17 @@ function create_items(items, mode) {
             e.forEach(e => { all_locs.push(e) });
         else if (i === 1 && mode == "default") {
             div_top5.find("ul").empty();
-            e.forEach(e => { div_top5.append(`<li><a data-loc="${e}" href="javascript:void(0);" class="search_locs">${e}</a></li>`) });
+            e.forEach(e => { div_top5.find("ul").append(`<li><a data-loc="${e}" href="javascript:void(0);" class="search_locs">${e}</a></li>`) });
         }    
         else
-            div_items.append(`<div>${e.title}<br>${e.description.substring(0, 99)} ...</div><button class="readmore" data-id="${e.id}">Readmore</button>`);
+            div_items.append(`<div class="content"><p class="title is-4">${e.title}</p><p class="subtitle">${e.description.substring(0, 99)} ...<a href="javascript:void(0);" class="readmore" data-id="${e.id}">read more</a></p></div><hr>`);
     })
 
 }
 
 function create_itemfull(item) {
         div_itemfull.find(".modal-content").empty();
-        div_itemfull.find(".modal-content").append( `<div>${item.title}<br>${item.description}<br>posted on ${item.creation_date.split("-")[2].split("T")[0]}/${item.creation_date.split("-")[1]}/${item.creation_date.split("-")[0]}</div>` );    
+        div_itemfull.find(".modal-content").append( `<div class="content"><p class="title is-4 has-text-white">${item.title}</p><p class="subtitle has-text-white">${item.description}</p><p class="content is-small has-text-white">posted on ${item.creation_date.split("-")[2].split("T")[0]}/${item.creation_date.split("-")[1]}/${item.creation_date.split("-")[0]}</p></div>` );    
         div_itemfull.toggleClass( "is-active" );              
 }
 
@@ -62,7 +66,7 @@ function create_matches(key) {
     let regexp = new RegExp(`${key}`,"i");
     if (inp_search_loc.val()) {
         if (matches = all_locs.filter(e=>e.search(regexp)!=-1?1:0)) {
-        matches.forEach(e=>ul_matches.append(`<li><a href="javascript:void(0)">${e}</a></li>`));
+        matches.forEach(e=>ul_matches.append(`<li><a href="javascript:void(0)" class="dropdown-item">${e}</a></li>`));
         }
     }    
 }
@@ -87,13 +91,16 @@ btn_search_submit.on("click",()=>{
 
 
 
-form.on("submit",e=>{
-   
+form.on("submit",async e=>{
+ 
     e.preventDefault();
     let root = e.target;
+    let error = false;
+    let success = true;
 
     if (root.title.value && root.description.value && root.name.value && root.loc.value && root.price.value && root.email.value) {
-console.log('success');
+
+        if (!isNaN(parseFloat(root.price.value))) {
             let data = {title:root.title.value,
                         description:root.description.value,
                         name:root.name.value,
@@ -102,20 +109,42 @@ console.log('success');
                         vb:(root.vb.checked == true)?1:0,
                         email:root.email.value};
 
-            connect_to_api(url+"add", "POST", JSON.stringify(data)).then(()=>{
+            await connect_to_api(url+"add", "POST", JSON.stringify(data)).then(()=>{
                 connect_to_api(url+"show", "GET").then(e=>create_items(e,"default"));
                 form.trigger("reset");
-            });
-              
-        
+                success = "Your entry has been successfully added!";
+                div_entry.toggleClass( "is-active" )
+            }).catch(console.log);
+        }
+        else
+            error = "Price must be in the format xx.xx!";    
+    }
+    else
+        error = "Please fill out all fields!";
 
+    if (error) {
+        div_message.toggleClass( "is-active" );
+        lastclass = "is-danger";
+        div_message.find(".message-header p").append("Error!");
+        div_message.find(".message").addClass(lastclass);
+        div_message.find(".message-body").append(error);
+    }
+    else {
+        div_message.toggleClass( "is-active" );
+        lastclass = "is-primary";
+        div_message.find(".message-header p").append("Success!");
+        div_message.find(".message").addClass(lastclass);
+        div_message.find(".message-body").append(success);
     }
 })
 
 btn_close_itemfull.on("click",  function(){div_itemfull.toggleClass( "is-active" )});
 btn_new_entry.on("click",  function(){div_entry.toggleClass( "is-active" )});
 btn_close_entry.on("click",  function(){div_entry.toggleClass( "is-active" )});
+btn_form_reset.on("click",  ()=>form.trigger("reset"));
 inp_search_loc.on("keyup",function(){create_matches(this.value)});
+inp_search_loc.on("click",()=>inp_search_loc.val(""));
+
 ul_matches.on("click",e=>{
     if(e.target.tagName==="A"){
         inp_search_loc.val(e.target.text);
@@ -123,4 +152,10 @@ ul_matches.on("click",e=>{
         connect_to_api(url+"search/loc/"+e.target.text, "GET").then(e=>create_items(e,"search"));        
     }    
 });
-inp_search_loc.on("click",()=>inp_search_loc.val(""));
+
+btn_close_message.on("click",  function(){
+    div_message.toggleClass( "is-active" );
+    div_message.find(".message-header p").empty();
+    div_message.find(".message").removeClass(lastclass);
+    div_message.find(".message-body").empty();
+}); 

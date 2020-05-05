@@ -31,7 +31,7 @@ app.get('/show', (req, res) => {
 connection_id.then (async kleinanzeigen => {
 
     await kleinanzeigen.query(
-            'SELECT DISTINCT location FROM anzeigen LIMIT 20',
+            'SELECT DISTINCT location FROM anzeigen WHERE creation_date > DATE_SUB(NOW(), INTERVAL 2 WEEK)',
         )
         .then(function(currentValue) {
             currentValue.forEach(element => {
@@ -40,7 +40,7 @@ connection_id.then (async kleinanzeigen => {
         });
 
     await kleinanzeigen.query(
-            'SELECT location, count(*) nums FROM anzeigen GROUP BY location ORDER BY nums DESC LIMIT 5',
+            'SELECT location, count(*) nums FROM anzeigen WHERE creation_date > DATE_SUB(NOW(), INTERVAL 2 WEEK) GROUP BY location ORDER BY nums DESC LIMIT 5',
         )
         .then(function(currentValue) {
             currentValue.forEach(element => {
@@ -49,7 +49,7 @@ connection_id.then (async kleinanzeigen => {
         });
 
     await kleinanzeigen.query(
-            'SELECT id, title, description FROM anzeigen LIMIT 20',
+            'SELECT id, title, description FROM anzeigen WHERE creation_date > DATE_SUB(NOW(), INTERVAL 2 WEEK) ORDER BY creation_date DESC LIMIT 20',
         )
         .then(function(currentValue) {
             currentValue.forEach(element => {
@@ -76,7 +76,7 @@ app.get('/show/:id', (req, res) => {
 app.get('/search/:keyword', (req, res) => {
     connection_id.then(connection => {
         connection.query(
-            'SELECT id, title, description FROM anzeigen WHERE (LOWER (title) LIKE LOWER (?) OR LOWER (title) LIKE LOWER (?) OR LOWER (title) LIKE LOWER (?)) AND creation_date > DATE_SUB(NOW(), INTERVAL 2 WEEK) LIMIT 20',
+            'SELECT id, title, description FROM anzeigen WHERE (LOWER (title) LIKE LOWER (?) OR LOWER (title) LIKE LOWER (?) OR LOWER (title) LIKE LOWER (?)) AND creation_date > DATE_SUB(NOW(), INTERVAL 2 WEEK) ORDER BY creation_date DESC LIMIT 20',
             [req.params.keyword + '%', '%' + req.params.keyword + '%', '%' + req.params.keyword]
         )
         .then(function(currentValue) {res.json(currentValue)});
@@ -87,7 +87,7 @@ app.get('/search/:keyword', (req, res) => {
 app.get('/search/loc/:city', (req, res) => {
     connection_id.then(connection => {
         connection.query(
-            'SELECT id, title, description, location, creation_date FROM anzeigen WHERE location = ? AND creation_date > DATE_SUB(NOW(), INTERVAL 2 WEEK) LIMIT 20',
+            'SELECT id, title, description, location, creation_date FROM anzeigen WHERE location = ? AND creation_date > DATE_SUB(NOW(), INTERVAL 2 WEEK) ORDER BY creation_date DESC LIMIT 20',
             req.params.city
         )
         .then(function(currentValue) {res.json(currentValue)});
@@ -108,14 +108,15 @@ app.post('/add', (req, res) => {
 
     res.json('new item added');
 
-    connection_id.then(connection => {    
+    connection_id.then(connection => {   
+
         connection.query(
             'INSERT INTO anzeigen (title, description, name, location, price, vb, email, creation_date) VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)',
             [newItem.title, newItem.description, newItem.name, newItem.location, newItem.price, newItem.vb, newItem.email]
         )
         .then(console.log)
-        .catch(console.log);
+        .catch(console.log)
     });
-})
+});
 
 app.listen(port, () => console.log(`Server is running... Port: ${port}`));
