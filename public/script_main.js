@@ -148,7 +148,7 @@ form.on("submit", e=>{
                         vb:(root.vb.checked == true)?1:0,
                         email:root.email.value};
                      
-                connect_to_api(url+"add", "POST", JSON.stringify(data));
+                connect_to_api(url+"add", "POST", JSON.stringify(data)).catch(console.log);
                 connect_to_api(url+"show", "GET").then(e=>create_items(e,"default"));
                 form.trigger("reset");
                 success = "Your entry has been successfully added!";
