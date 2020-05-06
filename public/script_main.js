@@ -130,7 +130,7 @@ btn_search_submit.on("click",()=>{
 
 
 
-form.on("submit",async e=>{
+form.on("submit", e=>{
  
     e.preventDefault();
     let root = e.target;
@@ -138,7 +138,7 @@ form.on("submit",async e=>{
     let success = true;
 
     if (root.title.value && root.description.value && root.name.value && root.loc.value && root.price.value && root.email.value) {
-
+        
         if (!isNaN(parseFloat(root.price.value)) || root.price.value==0) {
             let data = {title:root.title.value,
                         description:root.description.value,
@@ -147,13 +147,12 @@ form.on("submit",async e=>{
                         price:root.price.value,
                         vb:(root.vb.checked == true)?1:0,
                         email:root.email.value};
-
-            await connect_to_api(url+"add", "POST", JSON.stringify(data)).then(()=>{
+                     
+                connect_to_api(url+"add", "POST", JSON.stringify(data));
                 connect_to_api(url+"show", "GET").then(e=>create_items(e,"default"));
                 form.trigger("reset");
                 success = "Your entry has been successfully added!";
-                div_entry.toggleClass( "is-active" )
-            }).catch(console.log);
+                div_entry.toggleClass( "is-active" );
         }
         else
             error = "Price must be in the format xx.xx or 0!";    
