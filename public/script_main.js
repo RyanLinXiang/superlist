@@ -56,11 +56,46 @@ function create_items(items, mode) {
 
 function create_itemfull(item) {
 
-        div_itemfull.find(".modal-content").empty();
-        div_itemfull.find(".modal-content").append( `<div class="content"><p class="title is-4 has-text-white">${item.title} (${item.location})</p>
-                                                     <p class="subtitle has-text-white">${item.description} ... ${item.price} Euro, ${item.vb?'negotiable':'not negotiable'}</p>
-                                                     <p class="content is-small has-text-white">posted on ${item.creation_date.split("-")[2].split("T")[0]}/${item.creation_date.split("-")[1]}/${item.creation_date.split("-")[0]} (${item.dayspast} day${item.dayspast>1?'s':''} old) by <a href="mailto:${item.email}">${item.name}</a></p>
-                                                     </div>` );    
+        div_itemfull.find(".modal-card-title").empty();
+        div_itemfull.find(".modal-card-title").append(`${item.title}`);
+        div_itemfull.find(".modal-card-body").empty();
+        div_itemfull.find(".modal-card-body").append( `<p class="subtitle">${item.description}</p>`);    
+        div_itemfull.find(".modal-card-foot").empty();    
+       // div_itemfull.find(".modal-card-foot").append(`<p class="content">${item.price} Euro, ${item.vb?'negotiable':'not negotiable'} posted on ${item.creation_date.split("-")[2].split("T")[0]}/${item.creation_date.split("-")[1]}/${item.creation_date.split("-")[0]} (${item.dayspast} day${item.dayspast>1?'s':''} old) by <a href="mailto:${item.email}">${item.name}</a></p>`);                                        
+    
+        div_itemfull.find(".modal-card-foot").append(`<nav class="level" style="width:100%">
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Loc</p>
+            <p class="title">${item.location}</p>
+          </div>
+        </div>        
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Price</p>
+            <p class="title">${item.price}</p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Negotiable?</p>
+            <p class="title">${item.vb?'yes':'no'}</p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Contact</p>
+            <p class="title"><a href="mailto:${item.email}">${item.name}</a></p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Days</p>
+            <p class="title">${item.dayspast}</p>
+          </div>
+        </div>
+      </nav>`); 
+
         div_itemfull.toggleClass( "is-active" );              
 }
 
