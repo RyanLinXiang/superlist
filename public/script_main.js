@@ -144,7 +144,7 @@ form.on("submit",async e=>{
 
 btn_close_itemfull.on("click",  function(){div_itemfull.toggleClass( "is-active" )});
 btn_new_entry.on("click",  function(){div_entry.toggleClass( "is-active" )});
-btn_close_entry.on("click",  function(){div_entry.toggleClass( "is-active" )});
+btn_close_entry.on("click",  function(){div_entry.toggleClass( "is-active" ); form.trigger("reset")});
 btn_form_reset.on("click",  ()=>form.trigger("reset"));
 inp_search_loc.on("keyup",function(){create_matches(this.value)});
 inp_search_loc.on("click",()=>inp_search_loc.val(""));
