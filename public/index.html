@@ -5,7 +5,7 @@
 
   <head>
     <meta charset='utf-8'>
-    <title>e Market | List</title>
+    <title>eMarket | Article-List</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css" />
@@ -14,12 +14,13 @@
 
 <body>
   <!----------TITLE /SUBTITLE ------------->
-  <section class="hero is-dark">
+  <section class="hero is-link">
     <div class="hero-body">
       <div class="container">
         <h1 class="title">
-          ¯\_(ツ)_/¯e Market ¯\_(ツ)_/¯
+          ¯\_(ツ)_/¯ eMarket ¯\_(ツ)_/¯
         </h1>
+        <hr>
         <h2 class="subtitle">
           ツ Wunderlist ツ
         </h2>
@@ -27,166 +28,285 @@
     </div>
   </section>
 
-  <!---------- NAV: FIND POST & create New POST ------------->
+  <section class="section">
+    <div class="containar">
 
-  <!--Backlog 5.: input search keyword (list Posts, with title)-->
-  <nav class="level">
-    <!-- Left side: Feld + Button "Search" -->
-    <div class="level-left">
-      <div class="level-item">
-        <div class="field has-addons">
-          <p class="control">
-            <input class="input" id="search" type="text" placeholder="Find a post">
-          </p>
-          <p class="control">
-            <button class="button is-dark" id="search_submit"> Search </button>
-          </p>
-        </div>
-      </div>
-    </div>
-    <!-- Right side: Button "Create a new POST" -->
-    <div class="level-right">
-      <button class="button is-dark" id="new_entry" data-target="modal-ter" aria-haspopup="true">Create a new
-        POST</button>
-  </nav>
-
-  <!--------- CONTENT: (Stiky Sidebar "TOP 5") + (List with 20 POST)  ------------->
-  <div class="columns">
-    <!-- Stiky Sidebar "TOP 5"(column 1)-->
-    <div class="column">
-      <div class="menu sticky">
-        <div id="top5">
-          <p class="menu-label"><b>Location: Top 5</b></p>
-          <ul id="menu" class="menu-list">
-            <li><a href="#1 Location">1. Location</a></li>
-            <li><a href="#2 Location">2. Location</a></li>
-            <li><a href="#3 Location">3. Location</a></li>
-            <li><a href="#4 Location">4. Location</a></li>
-            <li><a href="#5 Location">5. Location</a></li>
-          </ul>
-        </div>
-      </div>
-      
-        <div class="control">
-          <input class="input" type="text" id="search_loc" placeholder="Find location">
-          <ul id="matches"></ul>
-        </div>
-   
-    </div>
-    <!--List with 20 POST (column 2)-->
-    <div class="column is-three-quarters" id="items">
-      <article class="media">
-        <figure class="media-left">
-          <p class="image is-64x64">
-            <img src="https://bulma.io/images/placeholders/128x128.png">
-          </p>
-        </figure>
-        <div class="media-content">
-          <div class="field">
-            <p class="control">
-              <textarea class="textarea"></textarea>
-            </p>
-          </div>
-          <div class="field">
-            <p class="control">
-              <button class="readmore">Read more</button>
-            </p>
+      <!---------- Find Article & add neu article  ------------->
+      <!--Backlog 5.: input search keyword (list Posts, with title)-->
+      <div class="columns has-text-centered">
+        <!-- Left side: Feld + Button "Search" -->
+        <div class="column is-three-quarters">
+          <div class="box is-shadowless">
+            <div class="field has-addons">
+              <p class="control is-expanded">
+                <input class="input" id="search" type="text" placeholder="Find article">
+              </p>
+              <p class="control">
+                <button class="button is-link" id="search_submit"> Search </button>
+              </p>
+            </div>
           </div>
         </div>
-      </article>
-    </div> <!-- id="items"-->
+        <!-- Right side: Button "Create a new POST" -->
+        <div class="column">
+          <div class="box is-shadowless has-icons-right">
+            <button class="button is-link" id="new_entry" data-target="modal-ter" aria-haspopup="true">Add New
+              Article</button>
+          </div>
+        </div>
+      </div>
 
 
-    <!--------- PopUP: FORMULAR <-> button "Create a new POST"  ------------->
-    <!--Backlog 1.: Formular -->
-    <div class="modal" id="add_entry">
-      <div class="modal-background"></div>
-      <div class="modal-card">
-        <header class="modal-card-head">
-          <p class="modal-card-title">new entry</p>
-          <button class="delete" id="close_add_entry" aria-label="close"></button>
-        </header>
-        <section class="modal-card-body">
-          <!-- Content ... -->
-          <form name="entry">
-            <div class="container">
+      <!--------- CONTENT: (Stiky Sidebar "TOP 5") + (List with 20 POST)  ------------->
+      <div class="columns is-mobile">
+        <!-- Stiky Sidebar "TOP 5"(column 1)-->
+        <div class="column">
+          <div class="menu sticky"></div>
+          <div class="box is-shadowless">
+            <div class="card" id="top5">
+              <header class="card-header">
+                <p class="card-header-title has-text-link">Top 5</p>
+              </header>
+              <ul id="menu" class="menu-list">
+                <li><a href="#1 Location">1. Location</a></li>
+                <li><a href="#2 Location">2. Location</a></li>
+                <li><a href="#3 Location">3. Location</a></li>
+                <li><a href="#4 Location">4. Location</a></li>
+                <li><a href="#5 Location">5. Location</a></li>
+              </ul>
+            </div>
+
+            <div class="control">
+              <input class="input is-radiusless" type="text" id="search_loc" placeholder="Find location">
+              <ul id="matches"> </ul>
+            </div>
+          </div>
+        </div>
+        <!--List with 20 POST (column 2)-->
+        <div class="column is-three-quarters" id="items">
+          <div class="box is-shadowless">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title has-text-link">
+                  Article - Title "muster tri lala"
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo commodi obcaecati nam ex,
+                    perferendis blanditiis facere inventore. Eum nisi, omnis quisquam, ut numquam, distinctio tempora
+                    asperiores dignissimos ratione fugiat dolor. Lorem ipsum dolor sit amet, consectetur adipisicing
+                    elit.<br>
+                    <button class="readmore has-text-link">Read more</button></p>
+                  <hr>
+                  <div class="level">
+                    <a href="# mail">max@bmuster.com</a>
+                    <time datetime="2020-5-5">11:09 pm - 5 Mai 2020</time>
+                    <label class="label" id="loc">Location</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- to delete: preview: Article 2 -->
+          <div class="box is-shadowless">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title has-text-link">
+                  Article Title "muster tri lala"
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo commodi obcaecati nam ex,
+                    perferendis blanditiis facere inventore. Eum nisi, omnis quisquam, ut numquam, distinctio tempora
+                    asperiores dignissimos ratione fugiat dolor. Lorem ipsum dolor sit amet, consectetur adipisicing
+                    elit.<br>
+                    <button class="readmore has-text-link">Read more</button></p>
+                  <hr>
+                  <div class="level">
+                    <a href="# mail">max@bmuster.com</a>
+                    <time datetime="2020-5-5">11:09 pm - 5 Mai 2020</time>
+                    <label class="label" id="loc">Location</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- to delete: preview: Article 3 -->
+          <div class="box is-shadowless">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title has-text-link">
+                  Article Title "muster tri lala"
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo commodi obcaecati nam ex,
+                    perferendis blanditiis facere inventore. Eum nisi, omnis quisquam, ut numquam, distinctio tempora
+                    asperiores dignissimos ratione fugiat dolor. Lorem ipsum dolor sit amet, consectetur adipisicing
+                    elit.<br>
+                    <button class="readmore has-text-link">Read more</button></p>
+                  <hr>
+                  <div class="level">
+                    <a href="# mail">max@bmuster.com</a>
+                    <time datetime="2020-5-5">11:09 pm - 5 Mai 2020</time>
+                    <label class="label" id="loc">Location</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--end to delete: preview: Article 2 -->
+
+        </div> <!-- id="items"-->
+      </div>
+  </section>
+
+
+  <!--------- PopUP: FORMULAR <-> button "Create a new POST"  ------------->
+  <!--Backlog 1.: Formular -->
+  <section class="section">
+    <div class="container">
+      <div class="modal" id="add_entry">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+
+          <header class="modal-card-head">
+            <p class="modal-card-title">Add New Entry</p>
+            <button class="delete" id="close_add_entry" aria-label="close"></button>
+          </header>
+
+          <section class="modal-card-body">
+            <!-- Content ... -->
+            <form id="entry">
+
               <div class="field">
                 <label class="label">Title</label>
                 <div class="control">
-                  <input id="title" class="input" type="text" placeholder="enter the title (max 80 characters long)">
+                  <input class="input" id="title" type="text" placeholder="enter the title (max 80 characters long)">
                 </div>
               </div>
 
               <div class="field">
                 <label class="label">Description</label>
                 <div class="control">
-                  <textarea id="description" class="textarea" placeholder="Textarea"></textarea>
+                  <textarea class="textarea" id="description" placeholder="description"></textarea>
                 </div>
               </div>
 
               <div class="field">
                 <label class="label">Name</label>
-                <div class="control">
-                  <input id="name" class="input" type="text" placeholder="enter your name">
+                <div class="control has-icons-left">
+                  <input class="input" id="name" type="text" placeholder="enter your name">
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                  </span>
                 </div>
               </div>
 
               <div class="field">
                 <label class="label">Location</label>
-                <div class="control">
-                  <input id="loc" class="input" type="text" placeholder="enter your location">
+                <div class="control has-icons-left">
+                  <input class="input" id="loc" type="text" placeholder="enter your location">
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-map-marker-alt"></i>
+                  </span>
                 </div>
               </div>
 
               <div class="field">
                 <label class="label">Price</label>
-                <div class="control">
-                  <input id="price" class="input" type="text" placeholder="price">
+                <div class="control has-icons-left">
+                  <input class="input" id="price" type="text" placeholder="price">
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-euro-sign"></i>
+                  </span>
                 </div>
               </div>
 
+
               <div class="field">
-                <label class="label">Negotiable?</label>
                 <div class="control">
-               <input type="checkbox" id="vb">
+                  <label class="checkbox">
+                    <input type="checkbox" id="vb">
+                    Negotiable
+                  </label>
                 </div>
               </div>
 
               <div class="field">
                 <label class="label">Email</label>
-                <div class="control has-icons-left has-icons-right">
-                  <input id="email" class="input" type="email" placeholder="enter your email">
+                <div class="control has-icons-left">
+                  <input class="input" id="email" type="email" placeholder="name@maxmuster.com">
                   <span class="icon is-small is-left">
                     <i class="fas fa-envelope"></i>
                   </span>
                 </div>
               </div>
-          
-        </section>
-        <footer class="modal-card-foot">
-          <input type="submit" value="submit">
-          <button class="button">Cancel</button>
-        </footer>
-      </form>
+            </form>
+
+            <footer class="modal-card-foot">
+              <input class="button is-link" type="submit" value="Submit">
+              <button class="button">Cancel</button>
+            </footer>
+          </section>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </section>
+
+  <!--------- PopUP: Vollanzeige <-> button "READ MORE"  ------------->
+  <!--Backlog 3.: Vollanzeige - onclick "READ MORE": see all Infos about the Article-->
+
+  <div class="container">
+    <div class="modal is-active
+    " id="itemfull">
+      <div class="modal-background ">
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title"> Article Title "muster tri lala" </p>
+            <button class="modal-close is-large" aria-label="close" id="close_itemfull"></button>
+          </header>
+          <div class="modal-card-body">
+            <div class="content">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo commodi obcaecati nam ex,
+                perferendis blanditiis facere inventore. Eum nisi, omnis quisquam, ut numquam, distinctio tempora
+                asperiores dignissimos ratione fugiat dolor. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                <br>
+                <br>
+                Explicabo commodi obcaecati nam ex, perferendis blanditiis facere inventore. Eum nisi, omnis quisquam,
+                ut numquam, distinctio tempora asperiores dignissimos ratione fugiat dolor.
+
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo commodi obcaecati nam ex,
+                perferendis blanditiis facere inventore. Eum nisi, omnis quisquam, ut numquam, distinctio tempora
+                asperiores dignissimos ratione fugiat dolor.</p>
+              <p>Contact: <a href="#-email">max@bmuster.com</a> <br>
+                <time datetime="2020-5-5">11:09 pm - 5 Mai 2020</time>
+                <label class="label" id="loc">Location</label>
+              </p>
+            </div>
+          </div>
+         
+        </div>
       </div>
     </div>
   </div>
 
-  <!--------- PopUP: Vollanzeige <-> button "READ MORE"  ------------->
-  <!--Backlog 3.: Vollanzeige - onclick "READ MORE": see all Infos about the Post -->
-  <div class="modal" id="itemfull">
-    <div class="modal-background">
-
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        Miniproject <strong>eMarket</strong> by Lin | Sascha | Cris
+      </p>
     </div>
-    <div class="modal-content has-text-white">
-Hallo<br>
-Hallo<br>
-Date
-    </div>
-    <button class="modal-close is-large" aria-label="close" id="close_itemfull"></button>
-  </div>
+  </footer>
 
- <script src="script_main.js"></script>
+  <script src="script_main.js"></script>
 
 </body>
 
