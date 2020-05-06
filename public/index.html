@@ -182,7 +182,7 @@
 
           <section class="modal-card-body">
             <!-- Content ... -->
-            <form id="entry">
+            <form name="entry">
 
               <div class="field">
                 <label class="label">Title</label>
@@ -247,11 +247,10 @@
                   </span>
                 </div>
               </div>
-            </form>
-
+ 
             <footer class="modal-card-foot">
-              <input class="button is-link" type="submit" value="Submit">
-              <button class="button">Cancel</button>
+              <button type="submit" class="button is-primary">Submit</button></form>
+              <button class="button has-background-grey" id="reset">Reset</button>
             </footer>
           </section>
         </div>
@@ -264,35 +263,23 @@
   <!--------- PopUP: Vollanzeige <-> button "READ MORE"  ------------->
   <!--Backlog 3.: Vollanzeige - onclick "READ MORE": see all Infos about the Article-->
 
-  <div class="container">
-    <div class="modal" id="itemfull">
-      <div class="modal-background">
-        <div class="modal-card">
-          <header class="modal-card-head">
-            <p class="modal-card-title"> Article Title "muster tri lala" </p>
-            <button class="modal-close is-large" aria-label="close" id="close_itemfull"></button>
-          </header>
-          <div class="modal-card-body">
-            <div class="modal-content">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo commodi obcaecati nam ex,
-                perferendis blanditiis facere inventore. Eum nisi, omnis quisquam, ut numquam, distinctio tempora
-                asperiores dignissimos ratione fugiat dolor. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                <br>
-                <br>
-                Explicabo commodi obcaecati nam ex, perferendis blanditiis facere inventore. Eum nisi, omnis quisquam,
-                ut numquam, distinctio tempora asperiores dignissimos ratione fugiat dolor.
+  <div class="modal" id="itemfull">
+    <div class="modal-background"></div>
+    <div class="modal-content"></div>
+    <button class="modal-close is-large" aria-label="close" id="close_itemfull"></button>
+  </div>
 
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo commodi obcaecati nam ex,
-                perferendis blanditiis facere inventore. Eum nisi, omnis quisquam, ut numquam, distinctio tempora
-                asperiores dignissimos ratione fugiat dolor.</p>
-              <p>Contact: <a href="#-email">max@bmuster.com</a> <br>
-                <time datetime="2020-5-5">11:09 pm - 5 Mai 2020</time>
-                <label class="label" id="loc">Location</label>
-              </p>
-            </div>
-          </div>
+  <div class="modal" id="message">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <article class="message">
+        <div class="message-header">
+          <p></p>
+          <button class="delete" aria-label="delete" id="close_message"></button>
         </div>
-      </div>
+        <div class="message-body">
+        </div>
+      </article>
     </div>
   </div>
 
