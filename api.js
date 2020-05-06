@@ -1,8 +1,10 @@
-// begin api
+// using node.js and express.js
+// initializing express.js and mariadb
 const express = require('express');
 const mariadb = require('mariadb');
 const bodyParser =  require('body-parser');
 
+// mariadb connector
 let connection_id = mariadb.createConnection({
     host: 'localhost',
     user: 'root',
@@ -10,6 +12,7 @@ let connection_id = mariadb.createConnection({
     database: 'kleinanzeigen'
 });
 
+// initialize constant app with express.js, set server port to 3000
 const app = express();
 const port = 3000;
 
@@ -28,8 +31,7 @@ app.get('/show', (req, res) => {
     apiData.push([]);
     apiData.push([]);
     
-connection_id.then (async kleinanzeigen => {
-
+connection_id.then(async kleinanzeigen => {
     await kleinanzeigen.query(
             'SELECT DISTINCT location FROM anzeigen WHERE creation_date > DATE_SUB(NOW(), INTERVAL 2 WEEK)',
         )
@@ -56,7 +58,6 @@ connection_id.then (async kleinanzeigen => {
                 apiData.push(element);
             });
         });
-
     res.json(apiData);
 });
 });
