@@ -57,10 +57,9 @@ function create_items(items, mode) {
 function create_itemfull(item) {
     console.log(item.description);
         div_itemfull.find(".modal-content").empty();
-        div_itemfull.find(".modal-content").append( `<div class="content"><p class="title is-4">${item.title}</p>
-                                                     <p class="subtitle">${item.description}</p>
-                                                     <p class="content is-small">posted on ${item.creation_date.split("-")[2].split("T")[0]}/${item.creation_date.split("-")[1]}/${item.creation_date.split("-")[0]} (${item.dayspast} day${item.dayspast>1?'s':''} old)</p>
-                                                     </div>` );    
+        div_itemfull.find(".modal-card-title").empty();
+        div_itemfull.find(".modal-card-title").append( `${item.title}` );          
+        div_itemfull.find(".modal-content").append( `<p>${item.description}</p><div class="content is-small">posted on ${item.creation_date.split("-")[2].split("T")[0]}/${item.creation_date.split("-")[1]}/${item.creation_date.split("-")[0]} (${item.dayspast} day${item.dayspast>1?'s':''} old)</div>`);    
         div_itemfull.toggleClass( "is-active" );              
 }
 
