@@ -73,7 +73,7 @@ app.get('/show', (req, res) => {
 app.get('/show/:id', (req, res) => {
     connection_id.then(connection => {
         connection.query(
-            'SELECT id, title, description, creation_date, DATEDIFF(CURRENT_TIMESTAMP , creation_date) AS dayspast FROM anzeigen WHERE id = ?',
+            'SELECT *, DATEDIFF(CURRENT_TIMESTAMP , creation_date) AS dayspast FROM anzeigen WHERE id = ?',
             req.params.id
         )
         .then(currentValue => res.json(currentValue[0]));

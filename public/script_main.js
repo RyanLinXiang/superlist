@@ -55,11 +55,11 @@ function create_items(items, mode) {
 }
 
 function create_itemfull(item) {
-    console.log(item.description);
+
         div_itemfull.find(".modal-content").empty();
-        div_itemfull.find(".modal-content").append( `<div class="content"><p class="title is-4 has-text-white">${item.title}</p>
-                                                     <p class="subtitle has-text-white">${item.description}</p>
-                                                     <p class="content is-small has-text-white">posted on ${item.creation_date.split("-")[2].split("T")[0]}/${item.creation_date.split("-")[1]}/${item.creation_date.split("-")[0]} (${item.dayspast} day${item.dayspast>1?'s':''} old)</p>
+        div_itemfull.find(".modal-content").append( `<div class="content"><p class="title is-4 has-text-white">${item.title} (${item.location})</p>
+                                                     <p class="subtitle has-text-white">${item.description} ... ${item.price} Euro, ${item.vb?'negotiable':'not negotiable'}</p>
+                                                     <p class="content is-small has-text-white">posted on ${item.creation_date.split("-")[2].split("T")[0]}/${item.creation_date.split("-")[1]}/${item.creation_date.split("-")[0]} (${item.dayspast} day${item.dayspast>1?'s':''} old) by <a href="mailto:${item.email}">${item.name}</a></p>
                                                      </div>` );    
         div_itemfull.toggleClass( "is-active" );              
 }
@@ -88,7 +88,7 @@ div_top5.on("click",e=>{
 });
 
 btn_search_submit.on("click",()=>{
-    if (inp_search.val()) { console.log(inp_search.val());
+    if (inp_search.val()) { 
         connect_to_api(url+"search/"+inp_search.val(), "GET").then(e=>create_items(e,"search"));
     }
 })
