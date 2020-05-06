@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css" />
 </head>
 
-
 <body>
   <!----------TITLE /SUBTITLE ------------->
   <section class="hero is-link">
@@ -52,34 +51,36 @@
               Article</button>
           </div>
         </div>
-      </div>
+      </div> <!-- end -> class="columns has-text-centered" -->
 
 
       <!--------- CONTENT: (Stiky Sidebar "TOP 5") + (List with 20 POST)  ------------->
       <div class="columns is-mobile">
         <!-- Stiky Sidebar "TOP 5"(column 1)-->
         <div class="column">
-          <div class="menu sticky"></div>
-          <div class="box is-shadowless">
-            <div class="card" id="top5">
-              <header class="card-header">
-                <p class="card-header-title has-text-link">Top 5 Location</p>
-              </header>
-              <ul id="menu" class="menu-list">
-                <li><a href="#1 Location">1. Location</a></li>
-                <li><a href="#2 Location">2. Location</a></li>
-                <li><a href="#3 Location">3. Location</a></li>
-                <li><a href="#4 Location">4. Location</a></li>
-                <li><a href="#5 Location">5. Location</a></li>
-              </ul>
-            </div>
+          <div class="menu sticky">
+            <div class="box is-shadowless">
+              <div class="card" id="top5">
+                <header class="card-header">
+                  <p class="card-header-title has-text-link">Top 5 Location</p>
+                </header>
+                <ul id="menu" class="menu-list">
+                  <li><a href="#1 Location">1. Location</a></li>
+                  <li><a href="#2 Location">2. Location</a></li>
+                  <li><a href="#3 Location">3. Location</a></li>
+                  <li><a href="#4 Location">4. Location</a></li>
+                  <li><a href="#5 Location">5. Location</a></li>
+                </ul>
+              </div>
 
-            <div class="control">
-              <input class="input is-radiusless" type="text" id="search_loc" placeholder="Find location">
-              <ul id="matches"> </ul>
+              <div class="control">
+                <input class="input is-radiusless" type="text" id="search_loc" placeholder="Find location">
+                <ul id="matches"> </ul>
+              </div>
             </div>
           </div>
         </div>
+
         <!--List with 20 POST (column 2)-->
         <div class="column is-three-quarters" id="items">
           <div class="box is-shadowless">
@@ -91,17 +92,18 @@
               </header>
               <div class="card-content">
                 <div class="content">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo commodi obcaecati nam ex,
-                    perferendis blanditiis facere inventore. Eum nisi, omnis quisquam, ut numquam, distinctio tempora
-                    asperiores dignissimos ratione fugiat dolor. Lorem ipsum dolor sit amet, consectetur adipisicing
-                    elit.<br>
-                    <button class="readmore has-text-link">Read more</button></p>
-                  <hr>
-                  <div class="level">
-                    <a href="# mail">max@bmuster.com</a>
-                    <time datetime="2020-5-5">11:09 pm - 5 Mai 2020</time>
-                    <label class="label" id="loc">Location</label>
-                  </div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo commodi obcaecati nam ex,
+                      perferendis blanditiis facere inventore. Eum nisi, omnis quisquam, ut numquam, distinctio tempora
+                      asperiores dignissimos ratione fugiat dolor. Lorem ipsum dolor sit amet, consectetur adipisicing
+                      elit.<br>
+                      <button class="readmore has-text-link">Read more</button>
+                    </p>
+                    <hr>
+                    <div class="level">
+                      <a href="# mail">max@bmuster.com</a>
+                      <time datetime="2020-5-5">11:09 pm - 5 Mai 2020</time>
+                      <label class="label" id="loc">Location</label>
+                    </div>
                 </div>
               </div>
             </div>
