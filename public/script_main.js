@@ -49,7 +49,7 @@ function create_items(items, mode) {
             e.forEach(e => { div_top5.find("ul").append(`<li><a data-loc="${e}" href="javascript:void(0);" class="search_locs">${e}</a></li>`) });
         }    
         else
-            div_items.append(`<div class="content"><p class="title is-4">${e.title}</p><p class="subtitle">${e.description.substring(0, 99)} ...<a href="javascript:void(0);" class="readmore" data-id="${e.id}">read more</a></p></div><hr>`);
+            div_items.append(`<div class="box"><p class="title is-4">${e.title}</p><p class="subtitle">${e.description.substring(0, 99)} ...<a href="javascript:void(0);" class="readmore" data-id="${e.id}">read more</a></p></div>`);
     })
 
 }
