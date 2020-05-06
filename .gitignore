@@ -1,6 +1,8 @@
-node_modules/
-package.json
-public/index2.html
+node_modules
 package-lock.json
+<<<<<<< HEAD
+package.json
+=======
 public/.vscode
 public/index_backup.html
+>>>>>>> 9c6e4db3783b5bc679e803e3d9b8448798006a92
